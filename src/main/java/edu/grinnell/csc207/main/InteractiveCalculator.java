@@ -1,5 +1,5 @@
-package edu.grinnell.csc207;
+package edu.grinnell.csc207.main;
 
 public class InteractiveCalculator {
-  
+
 }
