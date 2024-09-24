@@ -11,18 +11,22 @@ public class BFCalculator {
   //Methods
   public void add(BigFraction val) {
     val.add(lastVal);
+    this.lastVal = val;
   }
 
   public void subtract(BigFraction val) {
     val.subtract(lastVal);
+    this.lastVal = val;
   }
 
   public void multiply(BigFraction val) {
     val.multiply(lastVal);
+    this.lastVal = val;
   }
 
   public void divide(BigFraction val) {
     val.divide(lastVal);
+    this.lastVal = val;
   }
 
   public void clear() {

@@ -1,7 +1,5 @@
 package edu.grinnell.csc207.util;
 
-import java.math.BigInteger;
-
 public class BFRegisterSet {
  //Fields
 
@@ -10,8 +8,7 @@ public class BFRegisterSet {
 //Constructors
   public BFRegisterSet() {
     for (int i = 0; i <= 25; i++) {
-      fractionStorage[i].num = null;
-      fractionStorage[i].denom = BigInteger.valueOf(1); 
+      fractionStorage[i] = new BigFraction(0, 1);
     }
   }
 

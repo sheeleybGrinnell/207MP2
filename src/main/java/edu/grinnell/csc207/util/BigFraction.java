@@ -12,6 +12,11 @@ public class BigFraction {
 
 //Constructors
 
+  public BigFraction() {
+    num = BigInteger.valueOf(0);
+    denom = BigInteger.valueOf(1);
+  }
+
   public BigFraction(BigInteger numerator, BigInteger denominator) {
     BigInteger gcd = numerator.gcd(denominator);
     num = numerator.divide(gcd);
@@ -27,11 +32,16 @@ public class BigFraction {
   }
 
   public BigFraction(String str) {
-    String[] numDenomArr = str.split("/", 0);
-    num = new BigInteger(numDenomArr[0]);
-    denom = new BigInteger(numDenomArr[1]);
-    BigInteger gcd = num.gcd(denom);
-    denom = denom.divide(gcd);
+    if (str.contains("/")) {
+      String[] numDenomArr = str.split("/", 0);
+      num = new BigInteger(numDenomArr[0]);
+      denom = new BigInteger(numDenomArr[1]);
+      BigInteger gcd = num.gcd(denom);
+      denom = denom.divide(gcd);
+    } else {
+      num = new BigInteger(str);
+      denom = BigInteger.valueOf(1);
+    }
   }
 
 //Methods
@@ -55,8 +65,8 @@ public class BigFraction {
     BigInteger resultNum;
     BigInteger resultDenom;
 
-    resultDenom = denom.multiply(subend.denom);
-    resultNum = (num.multiply(subend.denom)).subtract(subend.num.multiply(denom));
+    resultDenom = this.denom.multiply(subend.denom);
+    resultNum = (this.num.multiply(subend.denom)).subtract(subend.num.multiply(this.denom));
 
     return new BigFraction(resultNum, resultDenom);
   }
@@ -66,7 +76,7 @@ public class BigFraction {
   }
 
   public BigFraction divide(BigFraction x) {
-    return new BigFraction(num.multiply(x.denom), denom.multiply(x.num));
+    return new BigFraction(this.num.multiply(x.denom), this.denom.multiply(x.num));
   }
 
   public BigFraction fractional() {
