@@ -9,8 +9,8 @@ public class BFRegisterSet {
   public BFRegisterSet() {
     for (int i = 0; i <= 25; i++) {
       fractionStorage[i] = new BigFraction(0, 1);
-    }
-  }
+    } /* for block */
+  } /*BFRegisterSet() */
 
 
 //Methods
@@ -20,18 +20,18 @@ public class BFRegisterSet {
         fractionStorage[i].num = val.num;
         fractionStorage[i].denom = val.denom;
         return;
-      }
-    }
+      } /* check if register is in valid range */
+    } /* for block */
     System.err.println("The provided register is out of the valid range. Please use a lowercase letter");
-  }
+  } /* store(register, val) */
 
   public BigFraction get(char Register) {
     for (int i = 0; i <= 25; i++) {
       if (((int) Register - 97) == i) {
         return fractionStorage[i];
-      }
-    }
+      } /* check for lowercase letter */
+    } /* for block */
     System.err.println("The provided register is out of the valid range. Please use a lowercase letter");
     return null;
-  }
-}
+  } /* get(Register) */
+} /* BFRegisterSet */
