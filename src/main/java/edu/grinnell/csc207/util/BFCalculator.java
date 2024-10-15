@@ -4,29 +4,29 @@ import java.math.BigInteger;
 
 public class BFCalculator {
   //Fields
-  public BigFraction lastVal;
+  public BigFraction lastVal = new BigFraction();
 
   //No Constructors needed
 
   //Methods
+  public BigFraction get() {
+    return lastVal;
+  }
+
   public void add(BigFraction val) {
-    val.add(lastVal);
-    this.lastVal = val;
+    this.lastVal = val.add(lastVal);
   }
 
   public void subtract(BigFraction val) {
-    val.subtract(lastVal);
-    this.lastVal = val;
+    this.lastVal = lastVal.subtract(val);
   }
 
   public void multiply(BigFraction val) {
-    val.multiply(lastVal);
-    this.lastVal = val;
+    this.lastVal = val.multiply(lastVal);
   }
 
   public void divide(BigFraction val) {
-    val.divide(lastVal);
-    this.lastVal = val;
+    this.lastVal = lastVal.divide(val);
   }
 
   public void clear() {

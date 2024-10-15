@@ -37,6 +37,7 @@ public class BigFraction {
       num = new BigInteger(numDenomArr[0]);
       denom = new BigInteger(numDenomArr[1]);
       BigInteger gcd = num.gcd(denom);
+      num = num.divide(gcd);
       denom = denom.divide(gcd);
     } else {
       num = new BigInteger(str);
@@ -72,7 +73,7 @@ public class BigFraction {
   }
 
   public BigFraction multiply(BigFraction x) {
-    return new BigFraction(num.multiply(x.num), denom.multiply(x.num));
+    return new BigFraction(num.multiply(x.num), denom.multiply(x.denom));
   }
 
   public BigFraction divide(BigFraction x) {
@@ -94,7 +95,10 @@ public class BigFraction {
   public String toString() {
     if (this.num.equals(BigInteger.ZERO)) {
       return "0";
-    }
+    } else if (this.num.mod(this.denom) == BigInteger.ZERO) {
+      return this.num.divide(this.denom).toString();
+    } else {
     return this.num + "/" + this.denom;
+    }
   }
 }
