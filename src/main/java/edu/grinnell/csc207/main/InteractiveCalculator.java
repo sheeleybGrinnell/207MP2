@@ -6,11 +6,20 @@ import edu.grinnell.csc207.util.BFCalculator;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
+/**
+ * A calculator the makes use of an execution loop to work with mainly fractions.
+ * @author Benjamin Sheeley
+ */
 
 public class InteractiveCalculator {
-  public static void main(String args[]) {
-    BFRegisterSet Register  = new BFRegisterSet();
-    BFCalculator Calc = new BFCalculator();
+  /**
+   * An interactive calculator that reads in one argument at a time.
+   * @param args
+   *  one argument that performs a calculation based on lastVal.
+   */
+  public static void main(String[] args) {
+    BFRegisterSet register = new BFRegisterSet();
+    BFCalculator calc = new BFCalculator();
     Scanner reader = new Scanner(System.in);
     PrintWriter pen = new PrintWriter(System.out, true);
     while (true) {
@@ -18,10 +27,9 @@ public class InteractiveCalculator {
       if (input.contains("STORE")) {
         String[] splitInput = input.split(" ");
         char[] keyArr = splitInput[1].toCharArray();
-        char key = keyArr[0]; 
-        Register.store(key, Calc.lastVal);
-      } /* if block, check for store */
-      else if (input.contains("QUIT")) {
+        char key = keyArr[0];
+        register.store(key, calc.get());
+      } /* if block, check for store */ else if (input.contains("QUIT")) {
         reader.close();
         return;
       } /* else if block, check for quit */ else {
@@ -31,83 +39,98 @@ public class InteractiveCalculator {
           BigFraction firstFraction = null;
           BigFraction secondFraction = null;
           if (actionBuffer[i].compareTo("+") == 0) {
-            if ((actionBuffer[i - 1].length() == 1) & ((actionBuffer[i - 1].charAt(0) >= 'a') & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
+            if ((actionBuffer[i - 1].length() == 1)
+                & ((actionBuffer[i - 1].charAt(0) >= 'a')
+                 & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
               char[] keyToChar = actionBuffer[i - 1].toCharArray();
               char key = keyToChar[0];
-              firstFraction = Register.get(key);
-              if ((actionBuffer[i + 1].length() == 1) & ((actionBuffer[i + 1].charAt(0) >= 'a') & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
+              firstFraction = register.get(key);
+              if ((actionBuffer[i + 1].length() == 1)
+                  & ((actionBuffer[i + 1].charAt(0) >= 'a')
+                   & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
                 char[] secondChar = actionBuffer[i + 1].toCharArray();
-                char secondKey = secondChar[0]; 
-                secondFraction = Register.get(secondKey);
+                char secondKey = secondChar[0];
+                secondFraction = register.get(secondKey);
               } /* if block */ else {
                 secondFraction = new BigFraction(actionBuffer[i + 1]);
               } /* else block */
             } /* if block */ else {
-            firstFraction = new BigFraction(actionBuffer[i - 1]);
-            secondFraction = new BigFraction(actionBuffer[i + 1]);
+              firstFraction = new BigFraction(actionBuffer[i - 1]);
+              secondFraction = new BigFraction(actionBuffer[i + 1]);
             } /* else block */
             BigFraction tempFraction = firstFraction.add(secondFraction);
             result = result.add(tempFraction);
-          } /* if block, addition */ 
+          } /* if block, addition */
           if (actionBuffer[i].compareTo("-") == 0) {
-            if ((actionBuffer[i - 1].length() == 1) & ((actionBuffer[i - 1].charAt(0) >= 'a') & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
+            if ((actionBuffer[i - 1].length() == 1)
+                & ((actionBuffer[i - 1].charAt(0) >= 'a')
+                 & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
               char[] keyToChar = actionBuffer[i - 1].toCharArray();
               char key = keyToChar[0];
-              firstFraction = Register.get(key);
-              if ((actionBuffer[i + 1].length() == 1) & ((actionBuffer[i + 1].charAt(0) >= 'a') & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
+              firstFraction = register.get(key);
+              if ((actionBuffer[i + 1].length() == 1)
+                  & ((actionBuffer[i + 1].charAt(0) >= 'a')
+                   & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
                 char[] secondChar = actionBuffer[i + 1].toCharArray();
-                char secondKey = secondChar[0]; 
-                secondFraction = Register.get(secondKey);
+                char secondKey = secondChar[0];
+                secondFraction = register.get(secondKey);
               } /* if block */ else {
                 secondFraction = new BigFraction(actionBuffer[i + 1]);
               } /* else block */
             } /* if block */ else {
-            firstFraction = new BigFraction(actionBuffer[i - 1]);
-            secondFraction = new BigFraction(actionBuffer[i + 1]);
+              firstFraction = new BigFraction(actionBuffer[i - 1]);
+              secondFraction = new BigFraction(actionBuffer[i + 1]);
             } /* else block */
             BigFraction tempFraction = firstFraction.subtract(secondFraction);
             result = tempFraction.subtract(result);
-          } /* if block, subtraction */ 
+          } /* if block, subtraction */
           if (actionBuffer[i].compareTo("*") == 0) {
-            if ((actionBuffer[i - 1].length() == 1) & ((actionBuffer[i - 1].charAt(0) >= 'a') & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
+            if ((actionBuffer[i - 1].length() == 1)
+                & ((actionBuffer[i - 1].charAt(0) >= 'a')
+                 & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
               char[] keyToChar = actionBuffer[i - 1].toCharArray();
               char key = keyToChar[0];
-              firstFraction = Register.get(key);
-              if ((actionBuffer[i + 1].length() == 1) & ((actionBuffer[i + 1].charAt(0) >= 'a') & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
+              firstFraction = register.get(key);
+              if ((actionBuffer[i + 1].length() == 1)
+                  & ((actionBuffer[i + 1].charAt(0) >= 'a')
+                   & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
                 char[] secondChar = actionBuffer[i + 1].toCharArray();
-                char secondKey = secondChar[0]; 
-                secondFraction = Register.get(secondKey);
+                char secondKey = secondChar[0];
+                secondFraction = register.get(secondKey);
               } /* if block */ else {
                 secondFraction = new BigFraction(actionBuffer[i + 1]);
               } /* else block */
             } /* if block */ else {
-            firstFraction = new BigFraction(actionBuffer[i - 1]);
-            secondFraction = new BigFraction(actionBuffer[i + 1]);
+              firstFraction = new BigFraction(actionBuffer[i - 1]);
+              secondFraction = new BigFraction(actionBuffer[i + 1]);
             } /* else block */
             BigFraction tempFraction = firstFraction.multiply(secondFraction);
             result = result.multiply(tempFraction);
-          } /* if block, multiplication */ 
+          } /* if block, multiplication */
           if (actionBuffer[i].compareTo("/") == 0) {
-            if ((actionBuffer[i - 1].length() == 1) & ((actionBuffer[i - 1].charAt(0) >= 'a') & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
+            if ((actionBuffer[i - 1].length() == 1)
+                & ((actionBuffer[i - 1].charAt(0) >= 'a')
+                 & (actionBuffer[i - 1].charAt(0) <= 'z'))) {
               char[] keyToChar = actionBuffer[i - 1].toCharArray();
               char key = keyToChar[0];
-              firstFraction = Register.get(key);
-              if ((actionBuffer[i + 1].length() == 1) & ((actionBuffer[i + 1].charAt(0) >= 'a') & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
+              firstFraction = register.get(key);
+              if ((actionBuffer[i + 1].length() == 1)
+                  & ((actionBuffer[i + 1].charAt(0) >= 'a')
+                   & (actionBuffer[i + 1].charAt(0) <= 'z'))) {
                 char[] secondChar = actionBuffer[i + 1].toCharArray();
-                char secondKey = secondChar[0]; 
-                secondFraction = Register.get(secondKey);
+                char secondKey = secondChar[0];
+                secondFraction = register.get(secondKey);
               } /* if block */ else {
                 secondFraction = new BigFraction(actionBuffer[i + 1]);
               } /* else block */
             } /* if block */ else {
-            firstFraction = new BigFraction(actionBuffer[i - 1]);
-            secondFraction = new BigFraction(actionBuffer[i + 1]);
+              firstFraction = new BigFraction(actionBuffer[i - 1]);
+              secondFraction = new BigFraction(actionBuffer[i + 1]);
             } /* else block */
             BigFraction tempFraction = firstFraction.divide(secondFraction);
             result = tempFraction.divide(result);
-          } /* if block, division */ 
+          } /* if block, division */
         } /* for block */
-        Calc.lastVal = result;
         String resultString = result.toString();
         pen.println(resultString);
       } /* else block */
